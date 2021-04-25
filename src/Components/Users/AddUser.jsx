@@ -20,6 +20,7 @@ export default function AddUser(props) {
     if (!isValidForm()) {
       return;
     }
+    props.onAddUser(enteredUsername, enteredAge);
     resetForm();
   };
   const resetForm = () => {
