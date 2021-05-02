@@ -31,7 +31,7 @@ export default function AddUser(props) {
     setError(null);
   };
   const isValidForm = (name, age) => {
-    if (name.trim().length === 0 || age === "" || age < 1) {
+    if (name.trim().length === 0 || age === "" || +age < 1) {
       setError({
         title: "Input Error",
         message: "Please enter a valid name and age (non-empty values)",
