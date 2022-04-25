@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/react-users-management/static/css/main.1c9ebaa8.chunk.css",
-    "main.js": "/react-users-management/static/js/main.76a98df0.chunk.js",
-    "main.js.map": "/react-users-management/static/js/main.76a98df0.chunk.js.map",
+    "main.js": "/react-users-management/static/js/main.68c9a5b5.chunk.js",
+    "main.js.map": "/react-users-management/static/js/main.68c9a5b5.chunk.js.map",
     "runtime-main.js": "/react-users-management/static/js/runtime-main.0d61cac8.js",
     "runtime-main.js.map": "/react-users-management/static/js/runtime-main.0d61cac8.js.map",
-    "static/js/2.2f0b8899.chunk.js": "/react-users-management/static/js/2.2f0b8899.chunk.js",
-    "static/js/2.2f0b8899.chunk.js.map": "/react-users-management/static/js/2.2f0b8899.chunk.js.map",
+    "static/js/2.8e5daffa.chunk.js": "/react-users-management/static/js/2.8e5daffa.chunk.js",
+    "static/js/2.8e5daffa.chunk.js.map": "/react-users-management/static/js/2.8e5daffa.chunk.js.map",
     "index.html": "/react-users-management/index.html",
     "static/css/main.1c9ebaa8.chunk.css.map": "/react-users-management/static/css/main.1c9ebaa8.chunk.css.map",
-    "static/js/2.2f0b8899.chunk.js.LICENSE.txt": "/react-users-management/static/js/2.2f0b8899.chunk.js.LICENSE.txt"
+    "static/js/2.8e5daffa.chunk.js.LICENSE.txt": "/react-users-management/static/js/2.8e5daffa.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.0d61cac8.js",
-    "static/js/2.2f0b8899.chunk.js",
+    "static/js/2.8e5daffa.chunk.js",
     "static/css/main.1c9ebaa8.chunk.css",
-    "static/js/main.76a98df0.chunk.js"
+    "static/js/main.68c9a5b5.chunk.js"
   ]
 }
