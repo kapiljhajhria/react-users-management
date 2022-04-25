@@ -3,24 +3,32 @@ import Card from "../UI/Card";
 import classes from "./AddUser.module.css";
 import Button from "../UI/Button";
 import ErrorModal from "../UI/ErrorModal";
+import Loader from "../UI/Loader";
 
 export default function AddUser(props) {
   let nameInputRef = useRef();
   let ageInputRef = useRef();
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
 
   //function
   //-
 
   const addUserHandler = (e) => {
-    const nameEntered = nameInputRef.current.value;
-    const ageEntered = ageInputRef.current.value;
     e.preventDefault();
-    if (!isValidForm(nameEntered, ageEntered)) {
-      return;
-    }
-    props.onAddUser(nameEntered, ageEntered);
-    resetForm();
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+      const nameEntered = nameInputRef.current.value;
+      const ageEntered = ageInputRef.current.value;
+      // setTimeout(() => {
+      if (!isValidForm(nameEntered, ageEntered)) {
+        return;
+      }
+      props.onAddUser(nameEntered, ageEntered);
+      resetForm();
+    }, 4000);
   };
   const resetForm = () => {
     ageInputRef.current.value = "";
@@ -36,6 +44,9 @@ export default function AddUser(props) {
         title: "Input Error",
         message: "Please enter a valid name and age (non-empty values)",
       });
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
       return false;
     }
 
@@ -51,6 +62,7 @@ export default function AddUser(props) {
           onConfirm={errorHandler}
         />
       )}
+      {loading && <Loader />}
       <Card className={classes.input}>
         <form onSubmit={addUserHandler} className={classes.form}>
           <label htmlFor="username">Username</label>
