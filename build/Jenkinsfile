@@ -1,0 +1,84 @@
+pipeline {
+    agent any
+    environment {
+        DOCKER_SVC_NAME='token-burner'
+        CINDER_DIR = '/home/ubuntu/personal'
+        DOCKER_REPO_NAME = 'services/jobs/users_management'
+    }
+
+    parameters{
+        string(
+            name: 'GIT_COMMIT',
+            description:'Git commit to build',
+            defaultValue: ''
+        )
+        string(
+            name : 'LATEST_IMAGE',
+            description : 'Latest image to use',
+            defaultValue : ''
+        )
+        string(
+            name : 'DOCKER_COMPOSE_DIR',
+            description : 'Docker compose directory',
+            defaultValue : ''
+        )
+    }
+
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                dir('code') {
+                    checkout scm;
+                }
+            }
+        }
+
+        stage('Build Image') {
+            steps {
+                dir('code') {
+                    script {
+                        LATEST_IMAGE = docker.build(DOCKER_REPO_NAME, "-f build/Dockerfile .")
+                    }
+                }
+            }
+        }
+
+        stage('Push Image to Registry') {
+            steps {
+                dir('code') {
+                    sh("git rev-parse --short HEAD | tr -d '\\n' > GIT_COMMIT")
+                    script {
+                        GIT_COMMIT=readFile('GIT_COMMIT')
+                    }
+                }
+            }
+        }
+
+        stage('Deploy to Dev') {
+            steps {
+                input 'Proceed with Dev deployment?'
+                deploy('dev')
+            }
+        }
+
+        stage('Deploy to Stage') {
+            steps {
+                input 'Proceed with Stage deployment?'
+                deploy('stage')
+            }
+        }
+
+        stage('Deploy to Prod') {
+            steps {
+                input 'Proceed with Prod deployment?'
+                deploy('prod')
+            }
+        }
+    }
+}
+
+def deploy(env) {
+    DOCKER_COMPOSE_DIR=CINDER_DIR+'/'+env
+    echo 'Deploying to '+env + ' environment' + DOCKER_COMPOSE_DIR + '...' + LATEST_IMAGE + '...' + GIT_COMMIT + '...'
+}
